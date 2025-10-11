@@ -1479,3 +1479,9 @@ textarea.form-input {
   display: inline-flex !important;
   text-decoration: none !important;
 }
+/* Ẩn nút chuyển ngữ trên mobile */
+@media (max-width: 768px) {
+  .sidebar-lang-switch {
+    display: none !important;
+  }
+}
