@@ -179,8 +179,3 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-
-// Dán đoạn code này vào dòng cuối cùng trong file main.js của bạn
-document.addEventListener('DOMContentLoaded', function() {
-  Fancybox.bind("[data-fancybox]", {});
-});
