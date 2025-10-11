@@ -287,16 +287,16 @@ article { display: none; }
     .info-more-btn span { display: none; }
 
 .sidebar-info-more {
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition2);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition2);
 }
 
     .sidebar.active .sidebar-info-more {
         opacity: 1;
         visibility: visible;
-     padding-bottom: 80px; /* thêm dòng này để tránh nút bị footer che */
-
+        padding-bottom: 80px; /* thêm dòng này để tránh nút bị footer che */
+}
     }
 
 .contacts-list {
