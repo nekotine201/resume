@@ -1463,18 +1463,21 @@ textarea.form-input {
     .timeline-text { max-width: 700px; }
 }
 :root {
-  --cv-accent: #f4d575; /* Màu vàng nhạt */
+  --cv-accent: #f4d575;
 }
 
 .btn-cv {
-  justify-content: center;
-  display: inline-block;
-  padding: 14px 30px;
+  display: block;               /* để dễ căn giữa */
+  width: 35%;                   /* nút nhỏ lại còn 35% */
+  margin: 20px auto 0;          /* căn giữa ngang + cách trên 1 chút */
+  text-align: center;           /* căn giữa text */
+  
+  padding: 12px 0;              /* giảm padding để nút gọn hơn */
   border-radius: 999px;
-  border: 4px solid var(--cv-accent);
+  border: 3px solid var(--cv-accent);
   color: var(--cv-accent);
   background: transparent;
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease, transform 0.06s ease;
@@ -1491,4 +1494,3 @@ textarea.form-input {
 .btn-cv:active {
   transform: translateY(0);
 }
-
