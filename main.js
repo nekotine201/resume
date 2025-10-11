@@ -130,3 +130,52 @@ for(let i = 0; i < navigationLinks.length; i++) {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const inputs = form.querySelectorAll("[data-form-input]");
+  const submitBtn = form.querySelector("[data-form-btn]");
+  const statusEl = document.getElementById("formStatus");
+
+  // URL Apps Script của bạn:
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwigjPerX2YCb8aVQK3tjswKsfPEw3fnKJdUbv9RqjVlk-_DehDivipqbJ9UVqFOQgu/exec";
+
+  // Bật/tắt nút theo validation
+  const validate = () => {
+    const ok = Array.from(inputs).every(i => i.value.trim() !== "");
+    submitBtn.disabled = !ok;
+  };
+  inputs.forEach(i => i.addEventListener("input", validate));
+  validate();
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true;
+    statusEl.textContent = "Sending...";
+
+    try {
+      const formData = new FormData(form);
+
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        body: formData
+      });
+
+      const text = await res.text();
+
+      if (res.ok && text.trim() === "OK") {
+        statusEl.textContent = "✅ Sent successfully!";
+        form.reset();
+        validate();
+      } else {
+        statusEl.textContent = "⚠️ Failed to send. Please try again.";
+        console.error("Unexpected response:", text);
+        submitBtn.disabled = false;
+      }
+    } catch (err) {
+      statusEl.textContent = "❌ Network error. Please try again.";
+      console.error(err);
+      submitBtn.disabled = false;
+    }
+  });
+});
