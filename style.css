@@ -1485,3 +1485,98 @@ textarea.form-input {
     display: none !important;
   }
 }
+:root { --bg-color: #161616; }
+
+/* Không chặn click toàn trang */
+html, body {
+  background: var(--bg-color);
+}
+
+/* Ghost */
+#ghost.ghost {
+  position: absolute;
+  z-index: 9999;
+  transform-origin: center;
+  width: 90px;
+  margin: 20px 0 0 -45px; /* đặt gốc nằm giữa */
+  pointer-events: none;   /* ghost không chặn thao tác */
+}
+
+#ghost .ghost__head {
+  position: relative;
+  width: 100%;
+  height: 82px;
+  background: #fff;
+  border-radius: 40px 40px 20px 20px;
+  box-shadow: 0 0 30px rgba(255,255,255,.45);
+}
+
+#ghost .ghost__eyes,
+#ghost .ghost__mouth {
+  position: absolute;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  top: 34px;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 50px;
+  background: var(--bg-color);
+  margin-left: -20px;
+  transform-origin: center;
+}
+
+#ghost .ghost__eyes { box-shadow: 40px 0 0 var(--bg-color); }
+
+#ghost .ghost__mouth {
+  margin: 0;
+  top: 60px;
+  transform: scale(0);
+  border-radius: 20px 20px 12px 12px;
+  width: 20px;
+  transform-origin: center bottom;
+  overflow: hidden;
+}
+
+#ghost .ghost__tail {
+  position: absolute;
+  z-index: -1;
+  top: 82px;
+  height: 55px;
+  width: 100%;
+  filter: url(#goo);
+}
+
+#ghost .ghost__tail:before {
+  content: '';
+  background: #fff;
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  height: 100px;
+  width: 100%;
+  border-radius: 40px 40px 5px 5px;
+}
+
+#ghost .ghost__rip {
+  width: 15px;
+  height: 28px;
+  background: #fff;
+  position: absolute;
+  top: 15px;
+  left: 0;
+  box-shadow:
+    -62px 0 0 #fff,
+    -31px 0 0 #fff,
+     31px 0 0 #fff,
+     62px 0 0 #fff,
+     93px 0 0 #fff;
+  border-radius: 50%;
+  animation: ghost-rips 1.2s linear infinite;
+}
+
+@keyframes ghost-rips {
+  0%   { left: 0;   top: 12px; }
+  50%  { left: 31px; top: 20px; }
+  100% { left: 62px; top: 12px; }
+}
