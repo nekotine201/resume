@@ -1463,37 +1463,46 @@ textarea.form-input {
     .timeline-text { max-width: 700px; }
 }
 
+.clients-wrapper {
+  width: 100%;
+  max-width: 900px; /* khống chế độ rộng theo khung bạn */
+  margin: 0 auto;
+  overflow: hidden; /* chỉ hiển thị logo trong vùng này */
+  position: relative;
+  padding: 20px 0;
+}
+
 .clients-list {
   display: flex;
   align-items: center;
-  gap: 60px; /* khoảng cách giữa các logo */
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  animation: scroll-left 25s linear infinite;
-}
-
-.clients-list:hover {
-  animation-play-state: paused; /* dừng lại khi hover nếu muốn */
+  gap: 80px;
+  animation: scrollLoop 30s linear infinite;
 }
 
 .clients-item img {
-  height: 60px; /* chỉnh kích thước logo */
+  height: 50px;
   width: auto;
-  opacity: 0.9;
+  opacity: 0.85;
   transition: opacity 0.3s;
+  filter: brightness(0.9);
 }
 
 .clients-item img:hover {
   opacity: 1;
+  filter: brightness(1);
 }
 
-/* Hiệu ứng chạy từ phải qua trái */
-@keyframes scroll-left {
+/* hiệu ứng chạy vòng lặp */
+@keyframes scrollLoop {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
+}
+
+/* tuỳ chọn: dừng lại khi hover */
+.clients-wrapper:hover .clients-list {
+  animation-play-state: paused;
 }
