@@ -1,8 +1,15 @@
-<link rel="stylesheet" href="style.css" />
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VuquangDesign — Vietnamese</title>
+  <link rel="stylesheet" href="style.css" />
   <link rel="shortcut icon" href="https://i.postimg.cc/9fqYVvxh/logo.png" type="image/x-icon"/>
-
+</head>
+<body>
   <main>
-    <!-- SIDEBAR -->
+    <!-- ================= SIDEBAR ================= -->
     <aside class="sidebar" data-sidebar>
       <div class="sidebar-info">
         <figure class="avatar-box">
@@ -11,7 +18,7 @@
 
         <div class="info-content">
           <h1 class="name" title="Vu Quang">Vu Quang</h1>
-          <p class="title">Graphic desginer</p>
+          <p class="title">Graphic designer</p>
         </div>
 
         <button class="info-more-btn" data-sidebar-btn>
@@ -20,8 +27,11 @@
         </button>
       </div>
 
+      <!-- sidebar-info-more -->
       <div class="sidebar-info-more">
+
         <div class="separator"></div>
+
         <ul class="contacts-list">
           <li class="contact-item">
             <div class="icon-box"><ion-icon name="mail-outline"></ion-icon></div>
@@ -62,22 +72,23 @@
         <ul class="social-list">
           <li class="social-item"><a href="https://www.facebook.com/Greenlight.2001/" class="social-link"><ion-icon name="logo-facebook"></ion-icon></a></li>
           <li class="social-item"><a href="https://www.behance.net/vuquangdesign" class="social-link"><ion-icon name="logo-behance"></ion-icon></a></li>
-          <li class="social-item"><a href="www.linkedin.com/in/vu-quang-1393a5278" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
+          <li class="social-item"><a href="https://www.linkedin.com/in/vu-quang-1393a5278" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a></li>
         </ul>
 
-      <!-- Language switch button under social icons -->
-<div class="sidebar-lang-switch">
-  <a href="index.html" aria-label="Switch to English" class="lang-btn-link">
-    <button class="form-btn" type="button" data-form-btn>
-      <span> Switch English</span>
-    </button>
-  </a>
-</div>
+        <!-- Language switch button (centered under social) -->
+        <div class="sidebar-lang-switch" style="display:flex;justify-content:center;align-items:center;margin-top:12px;">
+          <a href="index.html" aria-label="Switch to English" class="lang-btn-link" style="display:inline-flex;text-decoration:none;">
+            <button class="form-btn" type="button" data-form-btn>
+              <span>Switch English</span>
+            </button>
+          </a>
+        </div>
 
-      </div>
+      </div><!-- /sidebar-info-more -->
     </aside>
+    <!-- =============== /SIDEBAR =============== -->
 
-    <!-- MAIN -->
+    <!-- ================= MAIN ================= -->
     <div class="main-content">
       <nav class="navbar">
         <ul class="navbar-list">
@@ -134,7 +145,7 @@
           </ul>
         </section>
 
-        <!-- (Giữ nguyên modal demo) -->
+        <!-- Testimonials modal (giữ nguyên) -->
         <div class="modal-container" data-modal-container>
           <div class="overlay" data-overlay></div>
           <section class="testimonials-modal">
@@ -233,13 +244,13 @@
             <h3 class="h3">Học vấn</h3>
           </div>
 
-          <ol class="timeline-list">
-            <li class="timeline-item">
-              <h4 class="h4 timeline-item-title">Hanoi Vocational College of Technology</h4>
-              <span>2019 – 2022</span>
-              <p class="timeline-text">Xây dựng nền tảng vững chắc về truyền thông thị giác, thương hiệu và thiết kế nội dung số; phát triển tư duy sáng tạo &amp; kỹ năng kỹ thuật cho dự án thực tế.</p>
-            </li>
-          </ol>
+        <ol class="timeline-list">
+          <li class="timeline-item">
+            <h4 class="h4 timeline-item-title">Hanoi Vocational College of Technology</h4>
+            <span>2019 – 2022</span>
+            <p class="timeline-text">Xây dựng nền tảng vững chắc về truyền thông thị giác, thương hiệu và thiết kế nội dung số; phát triển tư duy sáng tạo &amp; kỹ năng kỹ thuật cho dự án thực tế.</p>
+          </li>
+        </ol>
         </section>
 
         <section class="clients">
@@ -481,12 +492,11 @@
         </section>
       </article>
     </div>
+    <!-- ================ /MAIN ================ -->
   </main>
 
   <script src="main.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-</html>
 </body>
 </html>
