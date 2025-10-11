@@ -1462,3 +1462,38 @@ textarea.form-input {
 
     .timeline-text { max-width: 700px; }
 }
+
+.clients-list {
+  display: flex;
+  align-items: center;
+  gap: 60px; /* khoảng cách giữa các logo */
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  animation: scroll-left 25s linear infinite;
+}
+
+.clients-list:hover {
+  animation-play-state: paused; /* dừng lại khi hover nếu muốn */
+}
+
+.clients-item img {
+  height: 60px; /* chỉnh kích thước logo */
+  width: auto;
+  opacity: 0.9;
+  transition: opacity 0.3s;
+}
+
+.clients-item img:hover {
+  opacity: 1;
+}
+
+/* Hiệu ứng chạy từ phải qua trái */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
