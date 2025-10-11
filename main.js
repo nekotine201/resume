@@ -1,181 +1,196 @@
 'use strict';
 
-//Opening or closing side bar
+/* ========== Helpers ========== */
+const toggle = (el, cls = "active") => el && el.classList.toggle(cls);
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
 
-const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
-
-const sidebar = document.querySelector("[data-sidebar]");
-const sidebarBtn = document.querySelector("[data-sidebar-btn]");
-
-sidebarBtn.addEventListener("click", function() {elementToggleFunc(sidebar); })
-
-//Activating Modal-testimonial
-
-const testimonialsItem = document.querySelectorAll('[data-testimonials-item]');
-const modalContainer = document.querySelector('[data-modal-container]');
-const modalCloseBtn = document.querySelector('[data-modal-close-btn]');
-const overlay = document.querySelector('[data-overlay]');
-
-const modalImg = document.querySelector('[data-modal-img]');
-const modalTitle = document.querySelector('[data-modal-title]');
-const modalText = document.querySelector('[data-modal-text]');
-
-const testimonialsModalFunc = function () {
-    modalContainer.classList.toggle('active');
-    overlay.classList.toggle('active');
+/* ========== Sidebar toggle ========== */
+const sidebar = $("[data-sidebar]");
+const sidebarBtn = $("[data-sidebar-btn]");
+if (sidebar && sidebarBtn) {
+  sidebarBtn.addEventListener("click", () => toggle(sidebar));
 }
 
-for (let i = 0; i < testimonialsItem.length; i++) {
-    testimonialsItem[i].addEventListener('click', function () {
-        modalImg.src = this.querySelector('[data-testimonials-avatar]').src;
-        modalImg.alt = this.querySelector('[data-testimonials-avatar]').alt;
-        modalTitle.innerHTML = this.querySelector('[data-testimonials-title]').innerHTML;
-        modalText.innerHTML = this.querySelector('[data-testimonials-text]').innerHTML;
+/* ========== Testimonials modal (giữ nguyên logic cũ, thêm guard) ========== */
+const testimonialsItem = $$("[data-testimonials-item]");
+const modalContainer = $("[data-modal-container]");
+const modalCloseBtn  = $("[data-modal-close-btn]");
+const overlay        = $("[data-overlay]");
 
-        testimonialsModalFunc();
-    })
-}
+const modalImg   = $("[data-modal-img]");
+const modalTitle = $("[data-modal-title]");
+const modalText  = $("[data-modal-text]");
 
-//Activating close button in modal-testimonial
+const openCloseModal = () => {
+  if (!modalContainer || !overlay) return;
+  toggle(modalContainer);
+  toggle(overlay);
+};
 
-modalCloseBtn.addEventListener('click', testimonialsModalFunc);
-overlay.addEventListener('click', testimonialsModalFunc);
-
-//Activating Filter Select and filtering options
-
-const select = document.querySelector('[data-select]');
-const selectItems = document.querySelectorAll('[data-select-item]');
-const selectValue = document.querySelector('[data-select-value]');
-const filterBtn = document.querySelectorAll('[data-filter-btn]');
-
-select.addEventListener('click', function () {elementToggleFunc(this); });
-
-for(let i = 0; i < selectItems.length; i++) {
-    selectItems[i].addEventListener('click', function() {
-
-        let selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
-        elementToggleFunc(select);
-        filterFunc(selectedValue);
-
+if (testimonialsItem.length && modalContainer && overlay) {
+  testimonialsItem.forEach((item) => {
+    item.addEventListener("click", () => {
+      if (modalImg) {
+        const av = item.querySelector("[data-testimonials-avatar]");
+        if (av) { modalImg.src = av.src; modalImg.alt = av.alt || ""; }
+      }
+      if (modalTitle) {
+        const t = item.querySelector("[data-testimonials-title]");
+        if (t) modalTitle.innerHTML = t.innerHTML;
+      }
+      if (modalText) {
+        const tx = item.querySelector("[data-testimonials-text]");
+        if (tx) modalText.innerHTML = tx.innerHTML;
+      }
+      openCloseModal();
     });
+  });
+
+  if (modalCloseBtn)  modalCloseBtn.addEventListener("click", openCloseModal);
+  if (overlay)        overlay.addEventListener("click", openCloseModal);
 }
 
-const filterItems = document.querySelectorAll('[data-filter-item]');
+/* ========== Filter select & buttons ========== */
+const select      = $("[data-select]");
+const selectItems = $$("[data-select-item]");
+const selectValue = $("[data-select-value]");
+const filterBtns  = $$("[data-filter-btn]");
+const filterItems = $$("[data-filter-item]");
 
-const filterFunc = function (selectedValue) {
-    for(let i = 0; i < filterItems.length; i++) {
-        if(selectedValue == "all") {
-            filterItems[i].classList.add('active');
-        } else if (selectedValue == filterItems[i].dataset.category) {
-            filterItems[i].classList.add('active');
-        } else {
-            filterItems[i].classList.remove('active');
-        }
+// Chuẩn hoá chuỗi để so sánh category
+const normalize = (s) => (s || "").toLowerCase().trim().replace(/\s+/g, " ");
+
+const isAll = (val) => {
+  const v = normalize(val);
+  return v === "all" || v === "tất cả";
+};
+
+const applyFilter = (selected) => {
+  const sel = normalize(selected);
+  filterItems.forEach((it) => {
+    const cat = normalize(it.dataset.category);
+    if (isAll(sel) || sel === cat) {
+      it.classList.add("active");
+    } else {
+      it.classList.remove("active");
     }
+  });
+};
+
+if (select) {
+  select.addEventListener("click", () => toggle(select));
 }
 
-//Enabling filter button for larger screens 
-
-let lastClickedBtn = filterBtn[0];
-
-for (let i = 0; i < filterBtn.length; i++) {
-    
-    filterBtn[i].addEventListener('click', function() {
-
-        let selectedValue = this.innerText.toLowerCase();
-        selectValue.innerText = this.innerText;
-        filterFunc(selectedValue);
-
-        lastClickedBtn.classList.remove('active');
-        this.classList.add('active');
-        lastClickedBtn = this;
-
-    })
-}
-
-// Enabling Contact Form
-
-const form = document.querySelector('[data-form]');
-const formInputs = document.querySelectorAll('[data-form-input]');
-const formBtn = document.querySelector('[data-form-btn]');
-
-for(let i = 0; i < formInputs.length; i++) {
-    formInputs[i].addEventListener('input', function () {
-        if(form.checkValidity()) {
-            formBtn.removeAttribute('disabled');
-        } else { 
-            formBtn.setAttribute('disabled', '');
-        }
-    })
-}
-
-// Enabling Page Navigation 
-
-const navigationLinks = document.querySelectorAll('[data-nav-link]');
-const pages = document.querySelectorAll('[data-page]');
-
-for(let i = 0; i < navigationLinks.length; i++) {
-    navigationLinks[i].addEventListener('click', function() {
-        
-        for(let i = 0; i < pages.length; i++) {
-            if(this.innerHTML.toLowerCase() == pages[i].dataset.page) {
-                pages[i].classList.add('active');
-                navigationLinks[i].classList.add('active');
-                window.scrollTo(0, 0);
-            } else {
-                pages[i].classList.remove('active');
-                navigationLinks[i]. classList.remove('active');
-            }
-        }
+if (selectItems.length) {
+  selectItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      const chosen = item.innerText;
+      if (selectValue) selectValue.innerText = item.innerText;
+      toggle(select);               // đóng dropdown
+      applyFilter(chosen);          // lọc
     });
+  });
 }
 
+// Nút filter trên màn hình lớn
+let lastClickedBtn = filterBtns[0] || null;
+
+if (filterBtns.length) {
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const chosen = btn.innerText;
+      if (selectValue) selectValue.innerText = btn.innerText;
+      applyFilter(chosen);
+
+      if (lastClickedBtn) lastClickedBtn.classList.remove("active");
+      btn.classList.add("active");
+      lastClickedBtn = btn;
+    });
+  });
+}
+
+/* ========== Contact form (Apps Script) ========== */
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("contactForm");
-  const inputs = form.querySelectorAll("[data-form-input]");
-  const submitBtn = form.querySelector("[data-form-btn]");
-  const statusEl = document.getElementById("formStatus");
+  const form      = $("#contactForm");
+  if (!form) return;
+
+  const inputs    = $$("[data-form-input]", form);
+  const submitBtn = $("[data-form-btn]", form);
+  const statusEl  = $("#formStatus");
 
   // URL Apps Script của bạn:
   const ENDPOINT = "https://script.google.com/macros/s/AKfycbwigjPerX2YCb8aVQK3tjswKsfPEw3fnKJdUbv9RqjVlk-_DehDivipqbJ9UVqFOQgu/exec";
 
-  // Bật/tắt nút theo validation
   const validate = () => {
-    const ok = Array.from(inputs).every(i => i.value.trim() !== "");
-    submitBtn.disabled = !ok;
+    const ok = inputs.every(i => i.value.trim() !== "");
+    if (submitBtn) submitBtn.disabled = !ok;
   };
+
   inputs.forEach(i => i.addEventListener("input", validate));
   validate();
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    submitBtn.disabled = true;
-    statusEl.textContent = "Sending...";
+    if (submitBtn) submitBtn.disabled = true;
+    if (statusEl) statusEl.textContent = "Sending...";
 
     try {
       const formData = new FormData(form);
-
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        body: formData
-      });
-
+      const res  = await fetch(ENDPOINT, { method: "POST", body: formData });
       const text = await res.text();
 
       if (res.ok && text.trim() === "OK") {
-        statusEl.textContent = "✅ Sent successfully!";
+        if (statusEl) statusEl.textContent = "✅ Sent successfully!";
         form.reset();
         validate();
       } else {
-        statusEl.textContent = "⚠️ Failed to send. Please try again.";
+        if (statusEl) statusEl.textContent = "⚠️ Failed to send. Please try again.";
         console.error("Unexpected response:", text);
-        submitBtn.disabled = false;
+        if (submitBtn) submitBtn.disabled = false;
       }
     } catch (err) {
-      statusEl.textContent = "❌ Network error. Please try again.";
+      if (statusEl) statusEl.textContent = "❌ Network error. Please try again.";
       console.error(err);
-      submitBtn.disabled = false;
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
 });
+
+/* ========== Page navigation (dùng data-target) ========== */
+const navLinks = $$("[data-nav-link]");
+const pages    = $$("[data-page]");
+
+// Fallback map nếu có trang nào quên gắn data-target
+const FALLBACK_MAP = {
+  "about": "about",
+  "resume": "resume",
+  "portfolio": "portfolio",
+  "contact": "contact",
+  "giới thiệu": "about",
+  "hồ sơ": "resume",
+  "dự án": "portfolio",
+  "liên hệ": "contact"
+};
+
+if (navLinks.length && pages.length) {
+  navLinks.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      // Ưu tiên data-target; nếu thiếu thì suy ra từ text (cả tiếng Việt & Anh)
+      const raw = btn.dataset.target || btn.innerText || btn.textContent || "";
+      const key = normalize(raw);
+      const target = FALLBACK_MAP[key] || key; // ví dụ "about"
+
+      // Bật trang mục tiêu, tắt trang khác
+      pages.forEach((pg) => {
+        pg.classList.toggle("active", normalize(pg.dataset.page) === target);
+      });
+
+      // Active trạng thái nút
+      navLinks.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      window.scrollTo(0, 0);
+    });
+  });
+}
