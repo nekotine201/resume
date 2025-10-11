@@ -1462,3 +1462,33 @@ textarea.form-input {
 
     .timeline-text { max-width: 700px; }
 }
+:root {
+  --cv-accent: #f4d575; /* Màu vàng nhạt */
+}
+
+.btn-cv {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 999px;
+  border: 4px solid var(--cv-accent);
+  color: var(--cv-accent);
+  background: transparent;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.06s ease;
+}
+
+.btn-cv:hover,
+.btn-cv:focus-visible {
+  background: var(--cv-accent);
+  color: #fff;
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.btn-cv:active {
+  transform: translateY(0);
+}
+
