@@ -295,9 +295,8 @@ article { display: none; }
     .sidebar.active .sidebar-info-more {
         opacity: 1;
         visibility: visible;
-        padding-bottom: 80px; /* thêm dòng này để tránh nút bị footer che */
 }
-    }
+    
 
 .contacts-list {
     display: grid;
