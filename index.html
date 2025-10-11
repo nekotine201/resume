@@ -673,7 +673,36 @@
     <script src="main.js"></script> 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<div id="ghost" class="ghost">
+      <div class="ghost__head">
+        <div class="ghost__eyes"></div>
+        <div class="ghost__mouth"></div>
+      </div>
+      <div class="ghost__tail">
+        <div class="ghost__rip"></div>
+      </div>
+    </div>
 
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur
+            in="SourceGraphic"
+            stdDeviation="10"
+            result="ghost-blur" />
+          <feColorMatrix
+            in="ghost-blur"
+            mode="matrix"
+            values="
+                  1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 16 -7"
+            result="ghost-gooey" />
+        </filter>
+      </defs>
+    </svg>
+    </body> </html>
 </body>
 </html>
 </body>
