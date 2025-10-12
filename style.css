@@ -1,6 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
     --bg-gradient-onyx: linear-gradient(to bottom right, hsl(240, 1%, 25%) 3%, hsl(0, 0%, 19%) 97%);
@@ -23,7 +21,7 @@
     --light-gray70: hsla(0, 0%, 84%, .7);
     --bittersweet-shimmer: hsl(0, 43%, 51%);
 
-    --ff-poppins: 'Be Vietnam Pro', sans-serif;
+    --ff-poppins: 'Poppins', sans-serif;
 
     --fs1: 24px;
     --fs2: 18px;
@@ -296,8 +294,6 @@ article { display: none; }
     .sidebar.active .sidebar-info-more {
         opacity: 1;
         visibility: visible;
-     padding-bottom: 80px; /* thêm dòng này để tránh nút bị footer che */
-
     }
 
 .contacts-list {
