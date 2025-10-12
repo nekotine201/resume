@@ -50,7 +50,7 @@
                         <div class="contact-info">
                             <p class="contact-title">Phone</p>
 
-                            <a href="tel:0398819201" class="contact-link">0398819201</a>
+                            <a href="tel:0398819201" class="contact-link">0398 819 201</a>
                         </div>
                     </li>
 
@@ -672,68 +672,6 @@
     <script src="main.js"></script> 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <!-- PRELOADER -->
-<div id="preloader" aria-hidden="true">
-  <div class="typing-line">
-    <span id="typing"></span><i class="caret"></i>
-  </div>
-</div>
-
-<script>
-  // Kịch bản: Hello -> xóa -> My name's Quang -> xóa -> I'm a graphic designer -> slide
-  const LINES = [
-    { text: "Hello", erase: true },
-    { text: "My name's Quang", erase: true },
-    { text: "I'm a graphic designer", erase: false }
-  ];
-
-  // Tổng thời lượng mục tiêu: 4000ms
-  // Cân chỉnh để đọc được mà vẫn đủ 4s
-  const TYPE_MS_PER_CHAR  = 50;   // tốc độ gõ
-  const ERASE_MS_PER_CHAR = 30;   // tốc độ xoá
-  const PAUSE_BETWEEN     = 200;  // dừng giữa các bước
-  const SLIDE_MS          = 300;  // thời gian trượt vào trang
-
-  const el = document.getElementById('typing');
-  const preloader = document.getElementById('preloader');
-
-  function wait(ms){ return new Promise(r=>setTimeout(r, ms)); }
-
-  async function type(text){
-    for (let i=1; i<=text.length; i++){
-      el.textContent = text.slice(0, i);
-      await wait(TYPE_MS_PER_CHAR);
-    }
-  }
-  async function erase(count){
-    for (let i=0; i<count; i++){
-      el.textContent = el.textContent.slice(0,-1);
-      await wait(ERASE_MS_PER_CHAR);
-    }
-  }
-
-  (async function run(){
-    document.documentElement.classList.add('is-loading');
-
-    // Chạy 3 dòng
-    for(const step of LINES){
-      await type(step.text);
-      await wait(PAUSE_BETWEEN);
-      if(step.erase){
-        await erase(step.text.length);
-        await wait(PAUSE_BETWEEN);
-      }
-    }
-
-    // Trượt lên vào trang chính
-    preloader.classList.add('slide-out');
-    document.documentElement.classList.add('app-in');
-    setTimeout(()=>{
-      preloader.remove();
-      document.documentElement.classList.remove('is-loading');
-    }, SLIDE_MS);
-  })();
-</script>
 
 
 </body>
