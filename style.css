@@ -1486,18 +1486,17 @@ textarea.form-input {
     display: none !important;
   }
 }
-/* Màu & nền lấy từ CSS hiện tại của bạn */
 :root{
-  /* nếu đã có thì giữ nguyên; nếu chưa có thì fallback */
+  /* Giữ màu site của bạn; nếu đã có thì không cần thêm lại */
   --yellow: #FFDA6B; /* hsl(45,100%,71%) */
-  --bg-gradient-jet: linear-gradient(to bottom right, rgba(36,36,36,.25) 3%, rgba(28,28,28,0) 100%), hsl(240, 2%, 13%);
+  --bg-gradient-jet: linear-gradient(to bottom right, hsla(240, 1%, 18%, .251) 3%, hsla(240, 2%, 11%, 0) 100%), hsl(240, 2%, 13%);
   --bg-dark: #0f0f10;
 }
 
 /* Khóa scroll khi loading */
 html.is-loading, html.is-loading body { overflow: hidden; }
 
-/* Preloader overlay */
+/* Preloader phủ toàn trang với nền đen xám như site */
 #preloader{
   position: fixed;
   inset: 0;
@@ -1506,18 +1505,17 @@ html.is-loading, html.is-loading body { overflow: hidden; }
   place-items: center;
   z-index: 9999;
   transform: translateY(0);
-  transition: transform 800ms ease, opacity 800ms ease;
+  transition: transform 300ms ease, opacity 300ms ease;
 }
 
-/* Slide up khi xong */
+/* Trượt lên khi xong */
 #preloader.slide-out{
   transform: translateY(-100%);
   opacity: 0;
 }
 
-/* Dòng chữ + caret */
+/* Dòng chữ + caret nháy */
 .typing-line{
-  font-family: inherit;
   font-weight: 700;
   font-size: clamp(22px, 4.5vw, 48px);
   letter-spacing: .5px;
@@ -1536,15 +1534,15 @@ html.is-loading, html.is-loading body { overflow: hidden; }
 }
 @keyframes blink{ 50%{ opacity: 0; } }
 
-/* Trang chính trượt từ dưới lên */
+/* Ẩn trang chính lúc đầu, chỉ hiện khi app-in */
 body{
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity 600ms ease, transform 600ms ease;
+  transition: opacity 300ms ease, transform 300ms ease;
 }
 html.app-in body{
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Nếu body của bạn đã có transition riêng, có thể đổi selector thành .page-wrapper hoặc .container chính */
+/* Nếu bạn có wrapper chính (vd .unslate_co--site-inner), thay 'body' bằng wrapper đó ở 2 block trên */
