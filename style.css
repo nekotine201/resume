@@ -1495,3 +1495,6 @@ textarea.form-input {
     display: none !important;
   }
 }
+form, input, textarea, button {
+  pointer-events: auto !important;
+}
