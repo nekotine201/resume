@@ -501,7 +501,7 @@ article { display: none; }
     overflow-y: auto;
     overscroll-behavior: contain;
     z-index: 20;
-    pointer-events: none;
+    pointer-events: auto;
     visibility: hidden;
 }
 
