@@ -526,7 +526,7 @@ article { display: none; }
     background: hsl(0, 0%, 5%);
     opacity: 0;
     visibility: hidden;
-    pointer-events: none;
+    pointer-events: auto;
     z-index: 1;
     transition: var(--transition1);
 }
@@ -759,7 +759,7 @@ article { display: none; }
     border-radius: 14px;
     z-index: 2;
     visibility: hidden;
-    pointer-events: none;
+    pointer-events: auto;
     transition: .5s ease-in-out;
 }
 
