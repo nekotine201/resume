@@ -195,25 +195,3 @@ if (navLinks.length && pages.length) {
   });
 }
 /*--------------------
-Get Mouse
---------------------*/
-let mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2, dir: '' };
-let clicked = false;
-const getMouse = (e) => {
-  mouse = {
-    x: e.clientX || e.pageX || e.touches[0].pageX || 0 || window.innerWidth / 2,
-    y: e.clientY || e.pageY || e.touches[0].pageY || 0 || window.innerHeight / 2,
-    dir: (getMouse.x > e.clientX) ? 'left' : 'right'
-  }
-};
-['mousemove', 'touchstart', 'touchmove'].forEach(e => {
-  window.addEventListener(e, getMouse);
-});
-window.addEventListener('mousedown', (e) => {
-  e.preventDefault();
-  clicked = true;
-});
-window.addEventListener('mouseup', () => {
-  clicked = false;
-});
-
