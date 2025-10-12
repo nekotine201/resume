@@ -1480,22 +1480,9 @@ textarea.form-input {
   text-decoration: none !important;
 }
 
-/* Fix lỗi không gõ được trong form liên hệ */
-.contact-form {
-  position: relative;
-  z-index: 100; /* cao hơn navbar */
-}
-
-.navbar {
-  z-index: 1; /* hạ thấp để không che form */
-}
-
 /* Ẩn nút chuyển ngữ trên mobile */
 @media (max-width: 768px) {
   .sidebar-lang-switch {
     display: none !important;
   }
-}
-form, input, textarea, button {
-  pointer-events: auto !important;
 }
