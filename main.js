@@ -210,7 +210,6 @@ const getMouse = (e) => {
   window.addEventListener(e, getMouse);
 });
 window.addEventListener('mousedown', (e) => {
-  e.preventDefault();
   clicked = true;
 });
 window.addEventListener('mouseup', () => {
