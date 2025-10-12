@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
 
 
@@ -287,16 +288,17 @@ article { display: none; }
     .info-more-btn span { display: none; }
 
 .sidebar-info-more {
-  opacity: 0;
-  visibility: hidden;
-  transition: var(--transition2);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transition2);
 }
 
     .sidebar.active .sidebar-info-more {
         opacity: 1;
         visibility: visible;
-}
-    
+     padding-bottom: 80px; /* thêm dòng này để tránh nút bị footer che */
+
+    }
 
 .contacts-list {
     display: grid;
@@ -501,7 +503,7 @@ article { display: none; }
     overflow-y: auto;
     overscroll-behavior: contain;
     z-index: 20;
-    pointer-events: auto;
+    pointer-events: none;
     visibility: hidden;
 }
 
@@ -526,7 +528,7 @@ article { display: none; }
     background: hsl(0, 0%, 5%);
     opacity: 0;
     visibility: hidden;
-    pointer-events: auto;
+    pointer-events: none;
     z-index: 1;
     transition: var(--transition1);
 }
@@ -759,7 +761,7 @@ article { display: none; }
     border-radius: 14px;
     z-index: 2;
     visibility: hidden;
-    pointer-events: auto;
+    pointer-events: none;
     transition: .5s ease-in-out;
 }
 
@@ -1478,11 +1480,4 @@ textarea.form-input {
 .lang-btn-link{
   display: inline-flex !important;
   text-decoration: none !important;
-}
-
-/* Ẩn nút chuyển ngữ trên mobile */
-@media (max-width: 768px) {
-  .sidebar-lang-switch {
-    display: none !important;
-  }
 }
