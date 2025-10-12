@@ -672,6 +672,89 @@
     <script src="main.js"></script> 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- PRELOADER -->
+<div id="preloader" aria-hidden="true">
+  <div class="typing-line">
+    <span id="typing"></span><i class="caret"></i>
+  </div>
+</div>
+
+<!-- Page wrapper (tùy trang của bạn đã có hay chưa) -->
+<script>
+  // === CONFIG ===
+  const LINES = ["Hello", "My name's Quang", "I'm a graphic designer"];
+  const TOTAL_MS = 4000;           // Tổng thời gian 4s
+  const SLIDE_MS = 800;            // Thời gian trượt vào trang
+  const PAUSE_BETWEEN = 250;       // dừng 0.25s giữa các lần gõ/xoá
+  // Tính tốc độ gõ/xoá để vừa 4s
+  const totalChars = LINES.join("").length;           // tổng ký tự được gõ
+  const eraseChars = LINES[0].length + LINES[1].length; // 2 lần xoá
+  const fixedOverheads = SLIDE_MS + PAUSE_BETWEEN*3;  // 2 pause giữa + 1 pause trước slide
+  const timeForTypingErasing = Math.max(400, TOTAL_MS - fixedOverheads); // phần dành cho gõ/xoá
+  const typeShare = 0.7;                               // 70% cho gõ, 30% cho xoá (cho cảm giác nhanh xoá)
+  const TYPE_MS_PER_CHAR  = (timeForTypingErasing * typeShare)  / Math.max(1,totalChars);
+  const ERASE_MS_PER_CHAR = (timeForTypingErasing * (1-typeShare)) / Math.max(1,eraseChars);
+
+  const el = document.getElementById('typing');
+  const preloader = document.getElementById('preloader');
+
+  function typeText(text, i=0) {
+    return new Promise(res=>{
+      const step = () => {
+        el.textContent = text.slice(0, i+1);
+        i++;
+        if (i < text.length) setTimeout(step, TYPE_MS_PER_CHAR);
+        else res();
+      };
+      step();
+    });
+  }
+  function eraseText(count) {
+    return new Promise(res=>{
+      const step = () => {
+        el.textContent = el.textContent.slice(0, -1);
+        if (el.textContent.length > 0) setTimeout(step, ERASE_MS_PER_CHAR);
+        else res();
+      };
+      // đảm bảo xoá đúng count (phòng khi có ký tự đặc biệt)
+      let target = Math.max(0, el.textContent.length - count);
+      const step2 = () => {
+        el.textContent = el.textContent.slice(0, -1);
+        if (el.textContent.length > target) setTimeout(step2, ERASE_MS_PER_CHAR);
+        else res();
+      };
+      // nếu đang rỗng thì xong luôn
+      if (el.textContent.length === 0) res();
+      else step2();
+    });
+  }
+
+  (async function run() {
+    document.documentElement.classList.add('is-loading');
+
+    // 1) "Hello"
+    await typeText(LINES[0]);
+    await new Promise(r=>setTimeout(r, PAUSE_BETWEEN));
+    await eraseText(LINES[0].length);
+
+    // 2) "My name's Quang"
+    await typeText(LINES[1]);
+    await new Promise(r=>setTimeout(r, PAUSE_BETWEEN));
+    await eraseText(LINES[1].length);
+
+    // 3) "I'm a graphic designer"
+    await typeText(LINES[2]);
+    await new Promise(r=>setTimeout(r, PAUSE_BETWEEN));
+
+    // 4) Slide vào trang chính
+    preloader.classList.add('slide-out');
+    document.documentElement.classList.add('app-in');
+    setTimeout(()=>{
+      preloader.remove();
+      document.documentElement.classList.remove('is-loading');
+    }, SLIDE_MS);
+  })();
+</script>
 
 </body>
 </html>
