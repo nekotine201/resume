@@ -1486,3 +1486,7 @@ textarea.form-input {
     display: none !important;
   }
 }
+.imgs {
+  width: 100%;
+  height: auto;
+}
